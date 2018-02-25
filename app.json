@@ -6,7 +6,27 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "改变从整理开始",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "selectedColor": "#1296db",
+    "list":[{
+      "pagePath":"pages/index/index",
+      "iconPath":"images/browse.png",
+      "text": "动态"
+    },
+    {
+      "pagePath": "pages/logs/logs",
+      "iconPath": "images/cart.png",
+      "text": "打卡"
+    },
+    {
+      "pagePath": "pages/logs/logs",
+      "iconPath": "images/account.png",
+      "text": "我"
+    }]
   }
 }
