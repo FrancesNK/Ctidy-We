@@ -6,9 +6,9 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#1296db",
     "navigationBarTitleText": "改变从整理开始",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"white"
   },
   "tabBar":{
     "backgroundColor": "#fff",
