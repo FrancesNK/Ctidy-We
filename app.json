@@ -16,17 +16,20 @@
     "selectedColor": "#1296db",
     "list":[{
       "pagePath":"pages/index/index",
-      "iconPath":"images/browse.png",
+      "iconPath":"images/browse_u.png",
+      "selectedIconPath":"images/browse_d.png",
       "text": "动态"
     },
     {
       "pagePath": "pages/logs/logs",
-      "iconPath": "images/cart.png",
+      "iconPath": "images/cart_u.png",
+      "selectedIconPath":"images/cart_d.png",
       "text": "打卡"
     },
     {
       "pagePath": "pages/account/account",
-      "iconPath": "images/account.png",
+      "iconPath": "images/account_u.png",
+      "selectedIconPath": "images/account_d.png",
       "text": "我"
     }]
   }
