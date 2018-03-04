@@ -1,0 +1,14 @@
+/* pages/blank/blank.wxss */
+.blank-add {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  align-items: center;
+  flex-direction: column;
+}
+.blank-descrip {
+  color: #aaa;
+  align-items: center;
+  flex-direction: column;
+}

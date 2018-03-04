@@ -1,0 +1,15 @@
+/* pages/goal/goal.wxss */
+.goal-descrip {
+  margin-left:10px;
+  height: 328rpx;
+  align-items: center;
+  border: 2px dashed #aaa;
+}
+.goal-add {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #aaa;
+}

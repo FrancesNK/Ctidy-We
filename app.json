@@ -2,7 +2,10 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/account/account"
+    "pages/account/account",
+    "pages/blank/blank",
+    "pages/goal/goal",
+    "pages/goal-submitted/goal-submitted"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -21,7 +24,7 @@
       "text": "动态"
     },
     {
-      "pagePath": "pages/logs/logs",
+      "pagePath": "pages/blank/blank",
       "iconPath": "images/cart_u.png",
       "selectedIconPath":"images/cart_d.png",
       "text": "打卡"

@@ -1,0 +1,6 @@
+<!--pages/goal-submitted/goal-submitted.wxml-->
+<view>
+  <text class="goal-title">{{"本周目标"}}</text>
+</view>
+<text class="goal-disp">{{"学习复习断舍离视频课1～6小节"}}</text>
+<button bindtap="bindSubmitTap"> 提交成果 </button>
