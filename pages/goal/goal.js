@@ -51,6 +51,32 @@ Page({
     this.setData({
       goalSubmitted: options.goalSubmitted == "true" ? true:false
     })
+    wx.login({
+      success: function (res) {
+        wx.getUserInfo({
+          withCredentials: true,
+          success: function (res0) {
+            console.log(res0);
+            var userInfo = res0.userInfo
+            if (res.code) {
+              //发起网络请求
+              wx.request({
+                url: 'http://127.0.0.1:8089/v1/miniapp/login',
+                method: "POST",
+                data: {
+                  code: res.code,
+                  rawData: res0.rawData,
+                  signature: res0.signature,
+                  userInfo: userInfo
+                }
+              })
+            } else {
+              console.log('获取用户登录态失败！' + res.errMsg)
+            }
+          }
+        })
+      }
+    });
   },
 
   /**
@@ -104,7 +130,7 @@ Page({
 
 function uploadtoServer (page, path) {
   console.log("going to upload----2");
-  wx.uploadFile({
+  /*wx.uploadFile({
      url: 'http://127.0.0.1:8089/v1/user/uploadimg',
      filePath: path[0],
      name: 'file',
@@ -115,5 +141,5 @@ function uploadtoServer (page, path) {
      },
      fail: function(res) {},
      complete: function(res) {},
-   })
+   })*/
 }
