@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    goalSubmitted:true,
+    plhGoal: '这周的整理目标是.......',
+    plhResult: '这周的整理成果是.......',
+    smbGoal: '提交目标',
+    smbResult: '提交成果',
+    des:''
   },
 
   bindSubmitTap: function () {
@@ -14,18 +19,44 @@ Page({
     })
   },
 
+  uploadPhoto: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        console.log("going to upload------0");
+        var tempFilePaths = res.tempFilePaths;
+        console.log("going to upload------1");
+        uploadtoServer(that, tempFilePaths);
+      }
+    })
+  },
+
+  /**
+   * 获取填写的文本
+   */
+  bindTextDes: function (e){
+    this.setData({
+      des: e.detail.value
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      goalSubmitted: options.goalSubmitted == "true" ? true:false
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
@@ -70,3 +101,19 @@ Page({
   
   }
 })
+
+function uploadtoServer (page, path) {
+  console.log("going to upload----2");
+  wx.uploadFile({
+     url: 'http://127.0.0.1:8089/v1/user/uploadimg',
+     filePath: path[0],
+     name: 'file',
+     header: {},
+     formData: {},
+     success: function(res) {
+       console.log(res)
+     },
+     fail: function(res) {},
+     complete: function(res) {},
+   })
+}

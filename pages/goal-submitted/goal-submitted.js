@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    goalSubmitted:true
   },
 
   /**
@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  bindSubmitTap: function () {
+    wx.navigateTo({
+      url: '../goal/goal?goalSubmitted=' + this.data.goalSubmitted
+    })
+  },
 })

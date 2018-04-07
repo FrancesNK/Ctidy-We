@@ -5,12 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    descrip: '本周还没有设置目标'
+    descrip: '本周还没有设置目标',
+    goalSubmitted: true
   },
 
   bindViewTap: function () {
     wx.navigateTo({
-      url: '../goal/goal'
+      url: '../goal/goal?goalSubmitted=false'
     })
   },
 

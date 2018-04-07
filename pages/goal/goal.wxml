@@ -1,7 +1,7 @@
 <!--pages/goal/goal.wxml-->
 <scrollview>
-  <textarea class="goal-descrip" maxlength="240" placeholder="这周的整理目标是......." auto-focus>
+  <textarea class="goal-descrip" bindblur='bindTextDes' maxlength="240" placeholder="{{goalSubmitted?plhResult:plhGoal}}"auto-focus>
   </textarea> 
 </scrollview>
-<image bindtap="bindViewTap" class="goal-add" src="/images/add.png" size="50%" background-size="cover"></image>
- <button bindtap="bindSubmitTap"> 提交目标 </button>
+<image bindtap="uploadPhoto" class="goal-add" src="/images/add.png" size="50%" background-size="cover"></image>
+ <button bindtap="bindSubmitTap"> {{goalSubmitted?smbResult:smbGoal}} </button>
