@@ -22,8 +22,8 @@
 }
 
 .delete-btn {
-  width: 58rpx;
-  height: 58rpx;
-  background-image: "images/close.png";
+  width: 38rpx;
+  height: 38rpx;
+  background-color: rgba(138,138,138,0.8);
 }
 

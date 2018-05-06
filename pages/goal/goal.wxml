@@ -5,8 +5,8 @@
 </scrollview>
  
 <view class="goal-add" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+  <image class="delete-btn" style="position: absolute;z-index:2" src="{{deletebtn}}" data-index="{{index}}" catchtap="deleteImg"></image>
   <image class="goal-add" src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImg"></image>
-  <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></view>
 </view>
 <image wx:if="{{imgs.length < 9}}" bindtap="uploadPhoto" class="goal-add goal-add-plus" src="{{defaultImageUpload}} " size="50%" background-size="cover"></image>
 

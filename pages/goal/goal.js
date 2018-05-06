@@ -8,6 +8,7 @@ Page({
     goalSubmitted:true,
     imgs:[],
     defaultImageUpload: "/images/add.png",
+    deletebtn: "/images/close.png",
     plhGoal: '这周的整理目标是.......',
     plhResult: '这周的整理成果是.......',
     smbGoal: '提交目标',
