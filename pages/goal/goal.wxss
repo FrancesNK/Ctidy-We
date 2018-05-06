@@ -35,7 +35,9 @@
 .submit-btn {
   top:30px;
   position:relative;
-
+  display: block;
+  text-align: center;
+  color:#1296db;
 }
 
 .delete-btn {

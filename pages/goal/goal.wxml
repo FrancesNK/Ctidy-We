@@ -11,4 +11,4 @@
 </view>
 <image wx:if="{{imgs.length < 9}}" bindtap="uploadPhoto" class="goal-add goal-add-plus" src="{{defaultImageUpload}} " size="50%" background-size="cover"></image>
 </div>
- <button class="submit-btn" bindtap="bindSubmitTap"> {{goalSubmitted?smbResult:smbGoal}} </button>
+ <div class="submit-btn" bindtap="bindSubmitTap"> {{goalSubmitted?smbResult:smbGoal}} </div>

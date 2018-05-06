@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goalSubmitted:true
+    goalSubmitted:true,
+    smbGoal: '提交成果'
   },
 
   /**
