@@ -15,7 +15,9 @@ Page({
       url: '../logs/logs'
     })
   },
+  
   onLoad: function () {
+    login()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -52,3 +54,33 @@ Page({
     })
   }
 })
+
+function login ()
+{
+  wx.login({
+    success: function (res) {
+      wx.getUserInfo({
+        withCredentials: true,
+        success: function (res0) {
+          console.log(res0);
+          if (res.code) {
+            //发起网络请求
+            wx.request({
+              url: 'https://api.ctidy.com/v1/miniapp/login',
+              method: "POST",
+              data: {
+                code: res.code,
+                rawData: res0.rawData,
+                signature: res0.signature,
+                userInfo: res0.userInfo
+              }
+            })
+          } else {
+            console.log('获取用户登录态失败！' + res.errMsg)
+          }
+        }
+      })
+    }
+  });
+  console.log("send to Jim")
+}

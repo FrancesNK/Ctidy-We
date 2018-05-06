@@ -3,5 +3,11 @@
   <textarea class="goal-descrip" bindblur='bindTextDes' maxlength="240" placeholder="{{goalSubmitted?plhResult:plhGoal}}"auto-focus>
   </textarea> 
 </scrollview>
-<image bindtap="uploadPhoto" class="goal-add" src="/images/add.png" size="50%" background-size="cover"></image>
- <button bindtap="bindSubmitTap"> {{goalSubmitted?smbResult:smbGoal}} </button>
+ 
+<view class="goal-add" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+  <image class="goal-add" src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImg"></image>
+  <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></view>
+</view>
+<image wx:if="{{imgs.length < 9}}" bindtap="uploadPhoto" class="goal-add goal-add-plus" src="{{defaultImageUpload}} " size="50%" background-size="cover"></image>
+
+ <button class="submit-btn" bindtap="bindSubmitTap"> {{goalSubmitted?smbResult:smbGoal}} </button>

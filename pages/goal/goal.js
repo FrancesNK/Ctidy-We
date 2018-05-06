@@ -6,6 +6,8 @@ Page({
    */
   data: {
     goalSubmitted:true,
+    imgs:[],
+    defaultImageUpload: "/images/add.png",
     plhGoal: '这周的整理目标是.......',
     plhResult: '这周的整理成果是.......',
     smbGoal: '提交目标',
@@ -13,6 +15,30 @@ Page({
     des:''
   },
 
+  // 删除图片
+  deleteImg: function (e) {
+    var imgs = this.data.imgs;
+    var index = e.currentTarget.dataset.index;
+    imgs.splice(index, 1);
+    this.setData({
+      imgs: imgs
+    });
+  },
+
+  previewImg: function(e) {
+    //获取当前图片的下标
+    var index = e.currentTarget.dataset.index;
+    //所有图片
+    var imgs = this.data.imgs;
+
+    wx.previewImage({
+      //当前显示图片
+      current: imgs[index],
+      //所有图片
+      urls: imgs
+    })
+  },
+  
   bindSubmitTap: function () {
     wx.navigateTo({
       url: '../goal-submitted/goal-submitted'
@@ -21,14 +47,31 @@ Page({
 
   uploadPhoto: function () {
     var that = this;
+    var imgs = this.data.imgs;
     wx.chooseImage({
-      count: 1,
+      count: 9,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         console.log("going to upload------0");
-        var tempFilePaths = res.tempFilePaths;
+        console.log(res)
+        var tempFilePaths = res.tempFilePaths
+        var imgs = that.data.imgs
+        for (var i = 0; i < tempFilePaths.length; i++) {
+          if (imgs.length >= 9) {
+            that.setData({
+              imgs: imgs
+            });
+            return false;
+          } else {
+            imgs.push(tempFilePaths[i]);
+          }
+        }
+        that.setData({
+          imgs: imgs
+        })
+        
         console.log("going to upload------1");
         uploadtoServer(that, tempFilePaths);
       }
@@ -61,7 +104,7 @@ Page({
             if (res.code) {
               //发起网络请求
               wx.request({
-                url: 'http://127.0.0.1:8089/v1/miniapp/login',
+                url: 'https://api.ctidy.com/v1/miniapp/login',
                 method: "POST",
                 data: {
                   code: res.code,
@@ -130,8 +173,8 @@ Page({
 
 function uploadtoServer (page, path) {
   console.log("going to upload----2");
-  /*wx.uploadFile({
-     url: 'http://127.0.0.1:8089/v1/user/uploadimg',
+  wx.uploadFile({
+     url: 'https://api.ctidy.com/v1/user/uploadimg',
      filePath: path[0],
      name: 'file',
      header: {},
@@ -141,5 +184,5 @@ function uploadtoServer (page, path) {
      },
      fail: function(res) {},
      complete: function(res) {},
-   })*/
+   })
 }

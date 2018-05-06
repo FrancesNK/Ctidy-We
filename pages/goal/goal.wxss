@@ -3,13 +3,27 @@
   margin-left:10px;
   height: 328rpx;
   align-items: center;
-  border: 2px dashed #aaa;
 }
 .goal-add {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  align-items: center;
-  flex-direction: column;
-  border: 2px dashed #aaa;
+  width: 158rpx;
+  height: 158rpx;
+  margin: 10rpx;
+  display: inline-block;
 }
+
+.goal-add-plus {
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+  background-color: #f5f5f5;
+}
+
+.submit-btn {
+  margin: 20rpx;
+}
+
+.delete-btn {
+  width: 58rpx;
+  height: 58rpx;
+  background-image: "images/close.png";
+}
+
