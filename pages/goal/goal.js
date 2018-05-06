@@ -41,6 +41,7 @@ Page({
   },
   
   bindSubmitTap: function () {
+    uploadtoServer(this, this.data.imgs);
     wx.navigateTo({
       url: '../goal-submitted/goal-submitted'
     })
@@ -73,8 +74,8 @@ Page({
           imgs: imgs
         })
         
-        console.log("going to upload------1");
-        uploadtoServer(that, tempFilePaths);
+        //console.log("going to upload------1");
+        //uploadtoServer(that, tempFilePaths);
       }
     })
   },
