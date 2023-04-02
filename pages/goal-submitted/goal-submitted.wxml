@@ -1,6 +1,0 @@
-<!--pages/goal-submitted/goal-submitted.wxml-->
-<div class="goal-disp">
-    <text class="goal-disp-text">{{"学习复习断舍离视频课1～6小节"}}</text>
-</div>
-<div class="result-sub-btn" bindtap="bindSubmitTap"> {{smbGoal}} </div>
-

@@ -1,12 +1,10 @@
-// pages/goal-submitted/goal-submitted.js
+// pages/blank/blank.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    goalSubmitted:true,
-    smbGoal: '提交成果'
   },
 
   /**
@@ -62,12 +60,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
-  },
-
-  bindSubmitTap: function () {
-    wx.navigateTo({
-      url: '../goal/goal?goalSubmitted=' + this.data.goalSubmitted
-    })
-  },
+    return {
+      title: '来一起改变从整理开始',
+      path: '/pages/wechat/wechat'
+    }
+  }
 })

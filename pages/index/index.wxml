@@ -1,3 +1,10 @@
 <!--index.wxml-->
 <view class="container">
+  <text class="text">{{ textString }}</text>
+  <button wx:if="{{showStart}}" class="start" bindtap="tapStartButton">开始</button>
+  <button wx:if="{{showYesOrNo}}" class="Yes" bindtap="tapYesButton">是</button>
+  <button wx:if="{{showYesOrNo}}" class="No" bindtap="tapNoButton">不是</button>
+  <button wx:if="{{showRestart}}" class="Yes" bindtap="tapStartButton">重新开始</button>
+  <button wx:if="{{showPage}}" class="No" bindtap="tapShowButton">加入社群</button>
+  <text wx:if="{{showRestart}}" class="description"> {{ description }} </text>
 </view>

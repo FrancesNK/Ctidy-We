@@ -1,11 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/goal/goal",
-    "pages/logs/logs",
     "pages/account/account",
-    "pages/blank/blank",
-    "pages/goal-submitted/goal-submitted"
+    "pages/wechat/wechat"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -17,23 +14,19 @@
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "selectedColor": "#1296db",
+    "navigationStyle": "custom",
     "list":[{
       "pagePath":"pages/index/index",
       "iconPath":"images/browse_u.png",
       "selectedIconPath":"images/browse_d.png",
-      "text": "动态"
+      "text": "扔or不扔"
     },
     {
-      "pagePath": "pages/blank/blank",
-      "iconPath": "images/cart_u.png",
-      "selectedIconPath":"images/cart_d.png",
-      "text": "打卡"
-    },
-    {
-      "pagePath": "pages/account/account",
+      "pagePath": "pages/wechat/wechat",
       "iconPath": "images/account_u.png",
       "selectedIconPath": "images/account_d.png",
-      "text": "我"
+      "text": "加入社群"
     }]
-  }
+  },
+  "shareTimeline": true
 }

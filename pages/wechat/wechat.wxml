@@ -1,0 +1,4 @@
+<!--pages/process/process.wxml-->
+<view class="container">
+  <web-view src="https://mp.weixin.qq.com/s?__biz=MzA4NDgyNDAwNA==&mid=2650988773&idx=1&sn=c35688bbbf5d7fd4813b40afd98c6e1b&chksm=84171a4eb3609358ef87f15678f3650a07be7b175f06b59c3d15d8e7b9bf5d87639c142ef4aa&token=2087475262&lang=zh_CN#rd"></web-view>
+</view>
