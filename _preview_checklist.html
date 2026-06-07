@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可打印清单预览</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #e8e8e8;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .page {
+    width: 400px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 36px 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 水印 */
+  .watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-size: 48px;
+    color: rgba(18, 150, 219, 0.06);
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 8px;
+    user-select: none;
+  }
+
+  /* 标题区 */
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #1296db;
+  }
+  .header .logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: block;
+  }
+  .header h1 {
+    font-size: 22px;
+    color: #1296db;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+  .header .subtitle {
+    font-size: 12px;
+    color: #999;
+  }
+  .header .brand-url {
+    font-size: 10px;
+    color: #1296db;
+    margin-top: 4px;
+  }
+
+  /* 任务列表 */
+  .task-list {
+    list-style: none;
+  }
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px dashed #e8e8e8;
+  }
+  .task-item:last-child { border-bottom: none; }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #1296db;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    background: #fff;
+  }
+
+  .task-content { flex: 1; }
+  .task-num {
+    font-size: 10px;
+    color: #bbb;
+    margin-right: 4px;
+  }
+  .task-title {
+    font-size: 13px;
+    color: #333;
+    font-weight: 600;
+  }
+  .task-desc {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* 分隔 */
+  .divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 16px 0;
+  }
+
+  /* 底部版权 */
+  .footer {
+    text-align: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 水印 -->
+  <div class="watermark">改变从整理开始</div>
+
+  <!-- 标题 -->
+  <div class="header">
+    <img class="logo" src="images/logo.jpg" alt="改变从整理开始" onerror="this.style.display='none'">
+    <h1>初学者的家居整理入门计划</h1>
+    <div class="subtitle">用起来，每完成一项就打一个 √</div>
+    <div class="brand-url">改变从整理开始</div>
+  </div>
+
+  <!-- 任务列表 -->
+  <ul class="task-list">
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">01  看整理电影</span>
+        <div class="task-desc">观看《怦然心动的人生整理魔法》，建立整理基础认知</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">02  过期食品</span>
+        <div class="task-desc">清理冰箱和储藏柜里过期的食品、调料、干货</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">03  过期药品</span>
+        <div class="task-desc">检查家里的药箱，丢弃过期的药品</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">04  无用文件</span>
+        <div class="task-desc">舍弃无用的广告传单、票据、发票</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">05  破损衣物</span>
+        <div class="task-desc">检查贴身衣物，舍弃破洞、变形的内衣、袜子</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">06  磨脚鞋子</span>
+        <div class="task-desc">整理鞋柜，舍弃磨脚、鞋底磨损严重、不舒服的鞋子</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">07  坏电子配件</span>
+        <div class="task-desc">舍弃有安全隐患的数据线、充电器</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">08  整理餐具</span>
+        <div class="task-desc">检查日常使用的餐具，舍弃有缺口的碗、杯碟</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">09  发霉用品</span>
+        <div class="task-desc">舍弃发霉的筷子、砧板、地垫、抹布</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">10  旧日历</span>
+        <div class="task-desc">丢弃旧年的日历、日程本和旧的计划表</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">11  漏水配件</span>
+        <div class="task-desc">检查卫浴设施，及时更换漏水的花洒、水龙头、软管</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">12  变形衣架</span>
+        <div class="task-desc">舍弃变形的衣架、收纳盒</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">13  多余袋子</span>
+        <div class="task-desc">清理外卖袋、奶茶袋、收纳袋，只保留真正需要的</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">14  磨损配饰</span>
+        <div class="task-desc">舍弃磨损严重的配饰</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">15  清理购物车</span>
+        <div class="task-desc">清理电商平台和购物App里的购物车、收藏夹</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">16  清理照片</span>
+        <div class="task-desc">删除手机相册中模糊、重复、无意义的照片</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">17  清理聊天记录</span>
+        <div class="task-desc">删除不需要保留的短信、微信聊天</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">18  盘点囤货</span>
+        <div class="task-desc">记录护肤品、化妆品、纸巾等囤货的品种和数量</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">19  需购清单</span>
+        <div class="task-desc">建立需购清单，避免重复购买已有的物品</div>
+      </div>
+    </li>
+    <li class="task-item">
+      <div class="checkbox"></div>
+      <div class="task-content">
+        <span class="task-title">20  关注我们</span>
+        <div class="task-desc">关注「改变从整理开始」公众号获取更多整理知识</div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- 底部版权 -->
+  <div class="footer">
+    © 改变从整理开始
+  </div>
+
+</div>
+
+</body>
+</html>

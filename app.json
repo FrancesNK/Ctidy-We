@@ -1,7 +1,7 @@
 {
   "pages":[
+    "pages/guide/guide",
     "pages/index/index",
-    "pages/account/account",
     "pages/wechat/wechat"
   ],
   "window":{
@@ -16,6 +16,12 @@
     "selectedColor": "#1296db",
     "navigationStyle": "custom",
     "list":[{
+      "pagePath":"pages/guide/guide",
+      "iconPath":"images/cart_u.png",
+      "selectedIconPath":"images/cart_d.png",
+      "text": "入门整理"
+    },
+    {
       "pagePath":"pages/index/index",
       "iconPath":"images/browse_u.png",
       "selectedIconPath":"images/browse_d.png",

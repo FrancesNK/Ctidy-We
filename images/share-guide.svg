@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1296db"/>
+      <stop offset="50%" stop-color="#1a9eeb"/>
+      <stop offset="50.5%" stop-color="#eaf6ff"/>
+      <stop offset="100%" stop-color="#fff"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect width="500" height="400" rx="20"/>
+    </clipPath>
+  </defs>
+
+  <rect width="500" height="400" rx="20" fill="url(#bg)" clip-path="url(#clip)"/>
+
+  <!-- Logo 白圈 -->
+  <circle cx="250" cy="82" r="30" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
+  <!-- Logo 占位 -->
+  <circle cx="250" cy="82" r="27" fill="#fff" opacity="0.2"/>
+  <text x="250" y="88" text-anchor="middle" font-size="24" fill="#fff" font-family="sans-serif">改</text>
+
+  <!-- 品牌名 -->
+  <text x="250" y="140" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff" letter-spacing="2" font-family="sans-serif">改变从整理开始</text>
+
+  <!-- 白色卡片 -->
+  <rect x="25" y="165" width="450" height="200" rx="16" fill="#fff" filter="url(#shadow)"/>
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="250" y="210" text-anchor="middle" font-size="26" font-weight="bold" fill="#1296db" font-family="sans-serif">初学者的家居整理</text>
+  <text x="250" y="242" text-anchor="middle" font-size="26" font-weight="bold" fill="#1296db" font-family="sans-serif">入门计划</text>
+
+  <!-- 副标题 -->
+  <text x="250" y="272" text-anchor="middle" font-size="15" fill="#999" font-family="sans-serif">20 步循序整理清单，轻松上手</text>
+
+  <!-- CTA 标签 -->
+  <rect x="160" y="292" width="180" height="34" rx="17" fill="#eaf6ff"/>
+  <text x="250" y="315" text-anchor="middle" font-size="14" font-weight="500" fill="#1296db" font-family="sans-serif">打开小程序 · 免费领取</text>
+
+  <!-- 版权 -->
+  <text x="250" y="388" text-anchor="middle" font-size="12" fill="#bbb" letter-spacing="1" font-family="sans-serif">© 改变从整理开始</text>
+</svg>

@@ -1,0 +1,91 @@
+<view class="page">
+
+  <!-- 顶部进度 -->
+  <view class="header">
+    <view class="header-title">初学者的家居整理入门计划</view>
+    <view class="progress-wrap">
+      <view class="progress-bar">
+        <view class="progress-inner" style="width: {{percent}}%;"></view>
+      </view>
+      <text class="progress-text">已完成 {{completedCount}} / {{totalCount}}</text>
+    </view>
+  </view>
+
+  <!-- 任务网格 -->
+  <view class="grid">
+    <view
+      wx:for="{{tasks}}"
+      wx:key="id"
+      class="card card-{{item.status}}"
+      data-id="{{item.id}}"
+      bindtap="tapTask"
+    >
+      <image wx:if="{{item.iconType === 'image'}}" class="card-img" src="{{item.icon}}" mode="aspectFill"></image>
+      <view wx:else class="card-icon">{{item.icon}}</view>
+      <view class="card-title">{{item.title}}</view>
+      <view wx:if="{{item.status === 'in_progress'}}" class="card-timer">⏳</view>
+      <view wx:if="{{item.status === 'completed'}}" class="card-check">✓</view>
+    </view>
+  </view>
+
+  <!-- 图例 -->
+  <view class="legend">
+    <view class="legend-item">
+      <view class="legend-dot gray"></view>
+      <text>未开始</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot blue"></view>
+      <text>进行中</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot green"></view>
+      <text>已完成</text>
+    </view>
+  </view>
+
+</view>
+
+<!-- 详情弹窗 -->
+<view class="modal-overlay" wx:if="{{showModal}}" bindtap="closeModal">
+  <view class="modal-sheet" catchtap="preventBubble">
+    <view class="modal-handle"></view>
+
+    <view class="modal-header">
+      <image wx:if="{{currentTask.iconType === 'image'}}" class="modal-img" src="{{currentTask.icon}}" mode="aspectFill"></image>
+      <view wx:else class="modal-icon">{{currentTask.icon}}</view>
+      <view class="modal-title">{{currentTask.title}}</view>
+      <view class="modal-desc">{{currentTask.desc}}</view>
+    </view>
+
+    <view wx:if="{{currentTask.id === 1}}" class="qrcode-wrap">
+      <view class="qrcode-crop">
+        <image 
+          class="qrcode-img"
+          src="/images/wechat.jpg"
+          mode="widthFix"
+          show-menu-by-longpress="{{true}}"
+        />
+      </view>
+      <text class="qrcode-tip">长按识别二维码关注</text>
+    </view>
+
+    <view class="modal-options">
+      <view
+        wx:for="{{statusOptions}}"
+        wx:key="value"
+        class="modal-option {{currentStatus === item.value ? 'active' : ''}}"
+        data-status="{{item.value}}"
+        bindtap="selectStatus"
+      >
+        <view class="modal-radio">
+          <view wx:if="{{currentStatus === item.value}}" class="modal-radio-dot"></view>
+        </view>
+        <text class="modal-option-emoji">{{item.emoji}}</text>
+        <text class="modal-option-label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <button class="modal-btn" bindtap="saveStatus">保存</button>
+  </view>
+</view>
