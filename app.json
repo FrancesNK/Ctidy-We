@@ -1,38 +1,43 @@
 {
-  "pages":[
+  "pages": [
     "pages/guide/guide",
     "pages/index/index",
-    "pages/wechat/wechat"
+    "pages/account/account",
+    "pages/wechat/wechat",
+    "pages/cloth/cloth",
+    "pages/default/default"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#1296db",
     "navigationBarTitleText": "改变从整理开始",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
-  "tabBar":{
+  "tabBar": {
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "selectedColor": "#1296db",
     "navigationStyle": "custom",
-    "list":[{
-      "pagePath":"pages/guide/guide",
-      "iconPath":"images/cart_u.png",
-      "selectedIconPath":"images/cart_d.png",
-      "text": "入门整理"
-    },
-    {
-      "pagePath":"pages/index/index",
-      "iconPath":"images/browse_u.png",
-      "selectedIconPath":"images/browse_d.png",
-      "text": "扔or不扔"
-    },
-    {
-      "pagePath": "pages/wechat/wechat",
-      "iconPath": "images/account_u.png",
-      "selectedIconPath": "images/account_d.png",
-      "text": "加入社群"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/guide/guide",
+        "iconPath": "images/cart_u.png",
+        "selectedIconPath": "images/cart_d.png",
+        "text": "入门整理"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/browse_u.png",
+        "selectedIconPath": "images/browse_d.png",
+        "text": "扔or不扔"
+      },
+      {
+        "pagePath": "pages/wechat/wechat",
+        "iconPath": "images/account_u.png",
+        "selectedIconPath": "images/account_d.png",
+        "text": "加入社群"
+      }
+    ]
   },
   "shareTimeline": true
 }

@@ -55,6 +55,13 @@ Page({
     }
   },
 
+  onShareTimeline() {
+    return {
+      title: '初学者的家居整理入门计划',
+      imageUrl: '/images/share-guide.png'
+    }
+  },
+
   onLoad() {
     this.loadProgress()
   },

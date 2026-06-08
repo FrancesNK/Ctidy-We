@@ -1,0 +1,57 @@
+/* pages/default/default.wxss */
+page {
+  background-color: #F5F5F5;
+  color: #333333;
+}
+
+.text {
+  margin: 70rpx;
+  font-size: 16px;
+  margin-bottom: 40rpx;
+}
+
+.description {
+  margin: 40px;
+  font-size: 14px;
+  line-height: 24px; 
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  width: 400rpx;
+  height: 400rpx;
+}
+
+.start {
+  margin: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #1296db;
+  box-sizing: border-box;
+}
+
+.Yes {
+  margin: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 120px;
+  font-size: 16px;
+  border: 2rpx solid #1296db;
+  box-sizing: border-box;
+}
+
+.No {
+  margin: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 120px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #1296db;
+  box-sizing: border-box;
+}
+

@@ -27,7 +27,7 @@
     "disableSWC": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.30.3",
+  "libVersion": "3.16.1",
   "appid": "wx89f049a627d55d37",
   "projectname": "Ctidy-We",
   "condition": {},
