@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整理手账本</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .phone {
+    width: 375px;
+    background: #f8f8f8;
+    border-radius: 24px;
+    overflow-y: auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  /* 顶部 */
+  .hero {
+    background: linear-gradient(160deg, #0d6baa, #1296db);
+    padding: 40px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .hero .sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* 当月手账卡片 */
+  .current-month {
+    margin: -24px 24px 20px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 1;
+  }
+  .current-month .month-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0d6baa;
+    margin-bottom: 8px;
+  }
+  .current-month .features {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .current-month .feature-tag {
+    font-size: 11px;
+    color: #1296db;
+    background: #eef5fb;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .current-month .btn-download {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1296db, #0d6baa);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  /* 往期手账 */
+  .archive {
+    margin: 0 24px 20px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .archive-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+  }
+  .theme-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, auto);
+    grid-auto-flow: column;
+    column-gap: 16px;
+  }
+  .theme-item {
+    display: flex;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #fafafa;
+    font-size: 12px;
+  }
+  .theme-item:nth-child(6) { border-bottom: none; }
+  .theme-item:nth-child(12) { border-bottom: none; }
+  .theme-month {
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 30px;
+    font-size: 11px;
+    color: #999;
+  }
+  .theme-name {
+    font-size: 12px;
+    flex: 1;
+    white-space: nowrap;
+  }
+  .theme-item.done .theme-name { color: #999; }
+  .theme-item.current .theme-name { color: #0d6baa; font-weight: 600; }
+  .theme-item:not(.done):not(.current) .theme-name { color: #999; }
+  .theme-check {
+    color: #1296db;
+    font-weight: 700;
+  }
+  .theme-tag {
+    font-size: 10px;
+    color: #fff;
+    background: #1296db;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .archive-note {
+    font-size: 10px;
+    color: #ccc;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* VIP */
+  .vip-section {
+    padding: 0 24px 24px;
+  }
+  .vip-card {
+    background: linear-gradient(135deg, #fff, #f9fbfd);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #b3d9f2;
+    position: relative;
+  }
+  .vip-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: linear-gradient(135deg, #c8956c, #a0704f);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+  .vip-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0d6baa;
+    margin-bottom: 14px;
+    padding-right: 60px;
+  }
+  .vip-benefits { margin-bottom: 0; }
+  .vip-benefit {
+    font-size: 13px;
+    color: #555;
+    padding: 6px 0;
+  }
+  .vip-more {
+    font-size: 13px;
+    color: #1296db;
+    margin-top: 14px;
+    display: block;
+    cursor: pointer;
+  }
+  .vip-more:active { opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="hero">
+    <h1>整理手账本</h1>
+    <div class="sub">每月一册 · 用整理治愈生活</div>
+  </div>
+
+  <div class="current-month">
+    <div class="month-title">2026年6月手账本</div>
+    <div class="features">
+      <span class="feature-tag">A4双面彩色打印</span>
+      <span class="feature-tag">短边翻转</span>
+      <span class="feature-tag">对折装订</span>
+    </div>
+    <button class="btn-download">? 观看广告后即可免费下载</button>
+  </div>
+
+  <div class="archive">
+    <div class="archive-title">2026·全年主题预告</div>
+    <div class="theme-list">
+      <div class="theme-item done"><span class="theme-month">1月</span><span class="theme-name">建立整理秩序</span><span class="theme-check">?</span></div>
+      <div class="theme-item done"><span class="theme-month">2月</span><span class="theme-name">数字极简</span><span class="theme-check">?</span></div>
+      <div class="theme-item done"><span class="theme-month">3月</span><span class="theme-name">衣柜换季</span><span class="theme-check">?</span></div>
+      <div class="theme-item done"><span class="theme-month">4月</span><span class="theme-name">探寻滋养</span><span class="theme-check">?</span></div>
+      <div class="theme-item done"><span class="theme-month">5月</span><span class="theme-name">工作整理</span><span class="theme-check">?</span></div>
+      <div class="theme-item current"><span class="theme-month">6月</span><span class="theme-name">优化饮食环境</span><span class="theme-tag">最新</span></div>
+      <div class="theme-item"><span class="theme-month">7月</span><span class="theme-name">规划家庭空间</span></div>
+      <div class="theme-item"><span class="theme-month">8月</span><span class="theme-name">梳理人际关系</span></div>
+      <div class="theme-item"><span class="theme-month">9月</span><span class="theme-name">整理纪念品</span></div>
+      <div class="theme-item"><span class="theme-month">10月</span><span class="theme-name">囤货盘点</span></div>
+      <div class="theme-item"><span class="theme-month">11月</span><span class="theme-name">家的保养</span></div>
+      <div class="theme-item"><span class="theme-month">12月</span><span class="theme-name">全年复盘</span></div>
+    </div>
+    <div class="archive-note">*实际推出内容可能优化调整，请以最终版本为准</div>
+  </div>
+
+  <div class="vip-section">
+    <div class="vip-card">
+      <div class="vip-badge">VIP</div>
+      <div class="vip-title">加入「改变从整理开始」年度会员</div>
+      <div class="vip-benefits">
+        <div class="vip-benefit">? 每月提前获赠整理手账本</div>
+        <div class="vip-benefit">? 群内随时提问，有问必答</div>
+        <div class="vip-benefit">? 同频伙伴一起坚持，告别三分钟热度</div>
+      </div>
+      <text class="vip-more">了解年度会员详情 ?</text>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

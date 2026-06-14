@@ -5,7 +5,8 @@
     "pages/account/account",
     "pages/wechat/wechat",
     "pages/cloth/cloth",
-    "pages/default/default"
+    "pages/default/default",
+    "pages/handbook/handbook"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,10 +33,10 @@
         "text": "扔or不扔"
       },
       {
-        "pagePath": "pages/wechat/wechat",
-        "iconPath": "images/account_u.png",
-        "selectedIconPath": "images/account_d.png",
-        "text": "加入社群"
+        "pagePath": "pages/handbook/handbook",
+        "iconPath": "images/book_u.png",
+        "selectedIconPath": "images/book_d.png",
+        "text": "手账本"
       }
     ]
   },

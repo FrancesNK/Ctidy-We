@@ -1,0 +1,183 @@
+page {
+  background: #f5f5f5;
+}
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* 顶部 */
+.hero {
+  background: linear-gradient(160deg, #0d6baa, #1296db);
+  padding: 60rpx 32rpx 48rpx;
+  text-align: center;
+}
+.hero-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+}
+.hero-sub {
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.7);
+  display: block;
+  margin-top: 12rpx;
+}
+
+/* 当月手账 */
+.current-month {
+  margin: -36rpx 40rpx 32rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+.month-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1296db;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.features {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+  margin-bottom: 24rpx;
+}
+.feature-tag {
+  font-size: 22rpx;
+  color: #1296db;
+  background: #eef5fb;
+  padding: 8rpx 18rpx;
+  border-radius: 32rpx;
+}
+.btn-download {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #1296db, #0d6baa);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.btn-download:active {
+  opacity: 0.85;
+}
+
+/* 全年主题 */
+.archive {
+  margin: 0 40rpx 32rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.archive-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.theme-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(6, auto);
+  grid-auto-flow: column;
+  column-gap: 24rpx;
+}
+.theme-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.theme-item:nth-child(6) { border-bottom: none; }
+.theme-item:nth-child(12) { border-bottom: none; }
+.theme-month {
+  font-weight: 700;
+  width: 56rpx;
+  flex-shrink: 0;
+  font-size: 22rpx;
+  color: #999;
+}
+.theme-name {
+  font-size: 24rpx;
+  flex: 1;
+  white-space: nowrap;
+}
+.theme-item.done .theme-name { color: #999; }
+.theme-item.current .theme-name { color: #0d6baa; font-weight: 600; }
+.theme-item:not(.done):not(.current) .theme-name { color: #999; }
+.theme-check {
+  color: #1296db;
+  font-weight: 700;
+  font-size: 22rpx;
+}
+.theme-tag {
+  font-size: 18rpx;
+  color: #fff;
+  background: #1296db;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  font-weight: 600;
+}
+.archive-note {
+  font-size: 20rpx;
+  color: #ccc;
+  margin-top: 20rpx;
+  text-align: center;
+  display: block;
+}
+
+/* VIP */
+.vip-section {
+  padding: 0 40rpx;
+}
+.vip-card {
+  background: linear-gradient(135deg, #fff, #f9fbfd);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  border: 1rpx solid #b3d9f2;
+  position: relative;
+}
+.vip-badge {
+  position: absolute;
+  top: -16rpx;
+  right: 32rpx;
+}
+.vip-badge text {
+  background: linear-gradient(135deg, #c8956c, #a0704f);
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 32rpx;
+  letter-spacing: 2rpx;
+}
+.vip-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1296db;
+  display: block;
+  margin-bottom: 20rpx;
+  padding-right: 100rpx;
+}
+.vip-benefit {
+  font-size: 26rpx;
+  color: #555;
+  padding: 10rpx 0;
+  display: block;
+}
+.vip-more {
+  font-size: 26rpx;
+  color: #1296db;
+  margin-top: 24rpx;
+  display: block;
+}
+.vip-more:active { opacity: 0.6; }
