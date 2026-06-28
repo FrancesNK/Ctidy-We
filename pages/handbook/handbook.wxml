@@ -7,7 +7,7 @@
 
   <!-- 当月手账 -->
   <view class="current-month">
-    <text class="month-title">2026年6月手账本</text>
+    <text class="month-title">2026年7月手账本</text>
     <view class="features">
       <text class="feature-tag">A4双面彩色打印</text>
       <text class="feature-tag">短边翻转</text>
@@ -25,8 +25,8 @@
       <view class="theme-item done"><text class="theme-month">3月</text><text class="theme-name">衣柜换季</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">4月</text><text class="theme-name">探寻滋养</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">5月</text><text class="theme-name">工作整理</text><text class="theme-check">✓</text></view>
-      <view class="theme-item current"><text class="theme-month">6月</text><text class="theme-name">优化饮食环境</text><text class="theme-tag">最新</text></view>
-      <view class="theme-item"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text></view>
+      <view class="theme-item done"><text class="theme-month">6月</text><text class="theme-name">优化饮食环境</text><text class="theme-check">✓</text></view>
+      <view class="theme-item current"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text><text class="theme-tag">最新</text></view>
       <view class="theme-item"><text class="theme-month">8月</text><text class="theme-name">梳理人际关系</text></view>
       <view class="theme-item"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text></view>
       <view class="theme-item"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text></view>

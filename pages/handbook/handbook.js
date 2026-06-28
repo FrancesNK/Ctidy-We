@@ -37,7 +37,7 @@ Page({
       url: 'https://cdn.jsdelivr.net/gh/FrancesNK/Ctidy-We@Ctidy-We/handbook.pdf',
       success: (res) => {
         wx.hideLoading()
-        const dest = `${wx.env.USER_DATA_PATH}/2026年6月手账本@改变从整理开始.pdf`
+        const dest = `${wx.env.USER_DATA_PATH}/2026年7月手账本@改变从整理开始.pdf`
         wx.getFileSystemManager().copyFile({
           srcPath: res.tempFilePath,
           destPath: dest,
