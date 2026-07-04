@@ -34,7 +34,7 @@ Page({
   openHandbook() {
     wx.showLoading({ title: '下载中...' })
     wx.downloadFile({
-      url: 'https://cdn.jsdelivr.net/gh/FrancesNK/Ctidy-We@Ctidy-We/handbook.pdf',
+      url: 'https://cdn.jsdelivr.net/gh/FrancesNK/Ctidy-We@Ctidy-We/handbook.pdf?t=' + Date.now(),
       success: (res) => {
         wx.hideLoading()
         const dest = `${wx.env.USER_DATA_PATH}/2026年7月手账本@改变从整理开始.pdf`
