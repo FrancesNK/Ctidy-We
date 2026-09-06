@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>转发卡片</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#e8e8e8; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; min-height:100vh; gap:24px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  .card {
+    width:400px; height:320px; position:relative; overflow:hidden;
+    background:linear-gradient(170deg,#f6f9fc 0%,#fff 40%,#faf7f3 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(0,0,0,.1);
+  }
+  .card::before {
+    content:''; position:absolute; top:-50px; right:-40px;
+    width:200px; height:200px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(18,150,219,.12), transparent 70%);
+  }
+  .card::after {
+    content:''; position:absolute; bottom:-20px; left:-30px;
+    width:140px; height:140px; border-radius:50%;
+    background:radial-gradient(circle at 60% 60%, rgba(180,140,100,.08), transparent 70%);
+  }
+  .content { text-align:center; z-index:1; }
+  .title {
+    font-size:36px; font-weight:800; color:#1a1a1a; letter-spacing:2px;
+  }
+  .title-accent { color:#1296db; }
+  .sub {
+    margin-top:12px; font-size:15px; color:#999; letter-spacing:1px;
+  }
+  .emoji-row {
+    margin-top:24px; display:flex; gap:12px; justify-content:center;
+  }
+  .emoji-row span { font-size:28px; }
+  .footer {
+    position:absolute; bottom:24px; font-size:12px; color:#bbb; letter-spacing:.5px;
+  }
+  .tip {
+    font-size:13px; color:#aaa; text-align:center; line-height:1.8;
+  }
+  .tip kbd {
+    background:#f0f0f0; padding:2px 8px; border-radius:4px;
+    border:1px solid #ddd; font-family:inherit; font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="content">
+    <div class="title"><span class="title-accent">整理计划</span></div>
+    <div class="sub">每月一主题 · 从物品到内心</div>
+
+  </div>
+  <div class="footer">©改变从整理开始</div>
+</div>
+
+<div class="tip">
+  📸 <kbd>F12</kbd> → <kbd>Ctrl+Shift+P</kbd> → <kbd>Capture node screenshot</kbd> → 点击卡片<br>
+  保存为 <kbd>share-handbook.png</kbd>
+</div>
+
+</body>
+</html>

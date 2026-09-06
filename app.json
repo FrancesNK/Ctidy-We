@@ -36,7 +36,7 @@
         "pagePath": "pages/handbook/handbook",
         "iconPath": "images/book_u.png",
         "selectedIconPath": "images/book_d.png",
-        "text": "手账本"
+        "text": "本月计划"
       }
     ]
   },

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1.0">
+<title>手账本 V2 设计</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#f5f5f5; display:flex; justify-content:center;
+    padding:20px 0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  .page {
+    width:375px; background:#f5f6f8; border-radius:16px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,.08);
+  }
+
+  /* hero - membership focused */
+  .hero {
+    background:#fff; margin:16px 20px; border-radius:16px;
+    padding:24px 24px 20px; box-shadow:0 2px 12px rgba(0,0,0,.04);
+  }
+  .hero-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .hero-label { font-size:14px; font-weight:700; color:#333; }
+  .progress-wrap { display:flex; align-items:center; gap:12px; }
+  .progress-bar {
+    flex:1; height:8px; background:#f0f0f0; border-radius:4px; overflow:hidden;
+  }
+  .progress-inner {
+    height:100%; background:linear-gradient(135deg,#07c160,#1296db);
+    border-radius:4px; transition:width .3s;
+  }
+  .progress-text { font-size:12px; color:#999; white-space:nowrap; }
+
+  /* section */
+  .section-header {
+    margin:28px 20px 12px; display:flex; align-items:center; gap:8px;
+  }
+  .section-title { font-size:16px; font-weight:700; color:#333; }
+  .section-badge {
+    background:#fff3e0; color:#e67a22; font-size:10px; padding:2px 8px;
+    border-radius:8px;
+  }
+
+  /* 9 grid */
+  .checkin-grid {
+    margin:0 20px 20px; display:grid; grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  .checkin-item {
+    background:#fff; border-radius:12px; padding:14px 10px; text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.03); position:relative;
+    border:2px solid transparent; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    min-height:90px; justify-content:center;
+  }
+  .checkin-item.done {
+    background:linear-gradient(135deg,#e8f5e9,#f1f8e9);
+    border-color:#a5d6a7;
+  }
+  .checkin-item .ci-icon { font-size:24px; }
+  .checkin-item .ci-label { font-size:11px; color:#666; line-height:1.4; }
+  .checkin-item.done .ci-label { color:#388e3c; }
+  .checkin-item .ci-check { position:absolute; top:4px; right:6px; font-size:14px; display:none; }
+  .checkin-item.done .ci-check { display:block; }
+  .checkin-count {
+    margin:0 20px 16px; text-align:center; font-size:13px; color:#aaa;
+  }
+  .checkin-count b { color:#1296db; }
+
+  /* membership */
+  .member-section { margin:0 20px 24px; }
+  .member-card {
+    background:#fff; border-radius:16px; padding:24px;
+    box-shadow:0 2px 12px rgba(0,0,0,.04); border:1.5px solid #e3f0f9; position:relative;
+  }
+  .member-badge {
+    position:absolute; top:-10px; right:20px;
+    background:linear-gradient(135deg,#d4a853,#b8943f); color:#fff;
+    font-size:10px; font-weight:700; padding:4px 14px; border-radius:10px;
+    letter-spacing:1px;
+  }
+  .member-card .member-heading { font-size:16px; font-weight:700; color:#1296db; text-align:left; margin-bottom:20px; }
+  .member-card .member-features {
+    display:flex; flex-direction:column; gap:10px; margin-bottom:20px;
+  }
+  .member-card .member-feature {
+    background:#f8fafd; border-radius:12px; padding:14px 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .member-card .mf-icon { font-size:28px; }
+  .member-card .mf-info { flex:1; }
+  .member-card .mf-title { font-size:14px; font-weight:600; color:#333; }
+  .member-card .mf-desc { font-size:11px; color:#999; margin-top:2px; }
+  .member-link {
+    display:block; text-align:right; font-size:13px; color:#1296db;
+    cursor:pointer; letter-spacing:.5px;
+  }
+
+  /* timeline */
+  .timeline { margin:0 20px 24px; }
+  .tl-title {
+    font-size:14px; font-weight:600; color:#999; margin-bottom:12px; letter-spacing:.5px;
+  }
+  .tl-list { display:flex; flex-direction:column; gap:6px; }
+  .tl-item {
+    display:flex; align-items:center; gap:10px; font-size:13px; padding:8px 12px;
+    border-radius:10px; background:#f5f5f5; color:#bbb;
+  }
+  .tl-item.done { background:#e8f5e9; color:#66bb6a; }
+  .tl-item.current { background:#e3f2fd; color:#1296db; }
+  .tl-month { font-weight:700; min-width:36px; }
+  .tl-check { margin-left:auto; font-size:12px; }
+  .tl-note { font-size:11px; color:#ccc; margin-top:10px; }
+
+  .footer-safe { height:12px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-header">
+      <span class="hero-label">8月整理计划 · 梳理人际关系</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-inner" style="width:22%;"></div>
+      </div>
+      <span class="progress-text">已完成 2 / 9</span>
+    </div>
+  </div>
+
+  <!-- 9宫格 -->
+  <div class="checkin-grid">
+    <div class="checkin-item"><span class="ci-icon">💬</span><span class="ci-label">给老朋友发消息</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item done"><span class="ci-icon">📋</span><span class="ci-label">整理通讯录</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">👋</span><span class="ci-label">退一个无效群</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">📞</span><span class="ci-label">给家人打电话</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">📰</span><span class="ci-label">清理公众号</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">📝</span><span class="ci-label">写感谢清单</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item done"><span class="ci-icon">🚫</span><span class="ci-label">拒绝无效社交</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">📷</span><span class="ci-label">清理相册人像</span><span class="ci-check">✓</span></div>
+    <div class="checkin-item"><span class="ci-icon">💌</span><span class="ci-label">给自己写信</span><span class="ci-check">✓</span></div>
+  </div>
+
+  <!-- 会员 -->
+  <div class="member-section">
+    <div class="member-card">
+      <span class="member-badge">VIP</span>
+      <div class="member-heading">加入「改变从整理开始」年度会员</div>
+      <div class="member-features">
+        <div class="member-feature">
+          <span class="mf-icon">📖</span>
+          <div class="mf-info">
+            <div class="mf-title">整理疗愈手账本</div>
+            <div class="mf-desc">每月一册，跟随主题，从物品走向内心</div>
+          </div>
+        </div>
+        <div class="member-feature">
+          <span class="mf-icon">💬</span>
+          <div class="mf-info">
+            <div class="mf-title">群内随时提问</div>
+            <div class="mf-desc">有问必答，不再一个人纠结</div>
+          </div>
+        </div>
+        <div class="member-feature">
+          <span class="mf-icon">🤝</span>
+          <div class="mf-info">
+            <div class="mf-title">同频伙伴陪伴</div>
+            <div class="mf-desc">一起坚持，告别三分钟热度</div>
+          </div>
+        </div>
+      </div>
+      <text class="member-link">了解年度会员详情 ›</text>
+    </div>
+  </div>
+
+  <!-- timeline -->
+  <div class="timeline">
+    <div class="tl-title">2026·全年主题预告</div>
+    <div class="tl-list">
+      <div class="tl-item done"><span class="tl-month">1月</span>建立整理秩序<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">2月</span>数字极简<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">3月</span>衣柜换季<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">4月</span>探寻滋养<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">5月</span>工作整理<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">6月</span>优化饮食环境<span class="tl-check">✓</span></div>
+      <div class="tl-item done"><span class="tl-month">7月</span>规划家庭空间<span class="tl-check">✓</span></div>
+      <div class="tl-item current"><span class="tl-month">8月</span>梳理人际关系</div>
+      <div class="tl-item"><span class="tl-month">9月</span>整理纪念品</div>
+      <div class="tl-item"><span class="tl-month">10月</span>囤货盘点</div>
+      <div class="tl-item"><span class="tl-month">11月</span>家的保养</div>
+      <div class="tl-item"><span class="tl-month">12月</span>全年复盘</div>
+    </div>
+    <div class="tl-note">*实际推出内容可能优化调整，请以最终版本为准</div>
+  </div>
+
+  <div class="footer-safe"></div>
+
+</div>
+
+</body>
+</html>

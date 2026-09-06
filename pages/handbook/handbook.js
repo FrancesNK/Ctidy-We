@@ -1,5 +1,26 @@
+const CHECKIN_KEY = "handbook_checkin_202609"
+
 Page({
+  data: {
+    tasks: require("./plan-data.js").map(t => ({
+      ...t, status:"not_started", locked: t.id === 4, revealed: false
+    })),
+    totalCount: 4,
+    doneCount: 0,
+    percent: 0,
+    showModal: false,
+    currentTask: null,
+    statusOptions: [
+      { value:"not_started", emoji:"⭕", label:"未开始" },
+      { value:"in_progress", emoji:"⏳", label:"进行中" },
+      { value:"completed", emoji:"✅", label:"已完成" }
+    ],
+    currentStatus: "",
+    pendingUnlock: null
+  },
+
   onLoad() {
+    this.loadCheckin()
     this.initRewardedAd()
   },
 
@@ -9,69 +30,148 @@ Page({
         adUnitId: 'adunit-fb6166b777c8839f'
       })
       this.videoAd.onClose(res => {
-        if (res && res.isEnded) {
-          this.openHandbook()
-        } else {
-          wx.showToast({ title: '看完广告才能下载哦', icon: 'none' })
+        if (res && res.isEnded && this.data.pendingUnlock) {
+          this.unlockTask(this.data.pendingUnlock)
+          this.setData({ pendingUnlock: null })
         }
       })
       this.videoAd.onError(() => {
-        wx.showToast({ title: '广告加载失败', icon: 'none' })
+        wx.showToast({ title: '广告加载失败，稍后再试', icon: 'none' })
       })
     }
   },
 
-  tapDownload() {
-    if (this.videoAd) {
-      this.videoAd.show().catch(() => {
-        this.videoAd.load().then(() => this.videoAd.show()).catch(() => {
-          wx.showToast({ title: '广告暂不可用，请稍后重试', icon: 'none' })
+  loadCheckin() {
+    try {
+      const saved = wx.getStorageSync(CHECKIN_KEY)
+      if (saved && Array.isArray(saved)) {
+        const tasks = this.data.tasks.map(t => {
+          const found = saved.find(s => s.id === t.id)
+          const merged = found
+            ? { ...t, status: found.status, locked: found.locked !== false && t.locked, revealed: found.revealed || found.status !== "not_started" }
+            : t
+          return merged
         })
-      })
-    }
-  },
-
-  openHandbook() {
-    wx.showLoading({ title: '下载中...' })
-    wx.downloadFile({
-      url: 'https://cdn.jsdelivr.net/gh/FrancesNK/Ctidy-We@Ctidy-We/handbook.pdf?t=' + Date.now(),
-      success: (res) => {
-        wx.hideLoading()
-        const dest = `${wx.env.USER_DATA_PATH}/2026年7月手账本@改变从整理开始.pdf`
-        wx.getFileSystemManager().copyFile({
-          srcPath: res.tempFilePath,
-          destPath: dest,
-          success: () => {
-            wx.openDocument({ filePath: dest, fileType: 'pdf', showMenu: true })
-          },
-          fail: () => {
-            wx.openDocument({ filePath: res.tempFilePath, fileType: 'pdf', showMenu: true })
-          }
-        })
-      },
-      fail: () => {
-        wx.hideLoading()
-        wx.showToast({ title: '下载失败，稍后重试', icon: 'none' })
+        this.setData({ tasks })
+        this.updateProgress(tasks)
       }
+    } catch (e) {}
+  },
+
+  saveCheckin() {
+    const snap = this.data.tasks.map(t => ({
+      id: t.id, status: t.status, locked: t.locked, revealed: t.revealed
+    }))
+    wx.setStorageSync(CHECKIN_KEY, snap)
+  },
+
+  tapCheckin(e) {
+    const id = e.currentTarget.dataset.id
+    const task = this.data.tasks.find(t => t.id === id)
+
+    // 广告锁
+    if (task.locked) {
+      this.setData({ pendingUnlock: task })
+      if (this.videoAd) {
+        this.videoAd.show().catch(() => {
+          this.videoAd.load().then(() => this.videoAd.show()).catch(() => {
+            this.setData({ pendingUnlock: null })
+            wx.showToast({ title: '广告暂不可用，请稍后重试', icon: 'none' })
+          })
+        })
+      } else {
+        this.unlockTask(task)
+        this.setData({ pendingUnlock: null })
+      }
+      return
+    }
+
+    // 未揭示的 → 揭示并打开弹窗
+    if (!task.revealed) {
+      const tasks = this.data.tasks.map(t => {
+        if (t.id === task.id) return { ...t, revealed: true }
+        return t
+      })
+      const updated = tasks.find(t => t.id === task.id)
+      this.setData({
+        tasks,
+        showModal: true,
+        currentTask: updated,
+        currentStatus: updated.status
+      })
+      this.saveCheckin()
+      return
+    }
+
+    // 已揭示的 → 正常弹窗
+    this.setData({
+      showModal: true,
+      currentTask: task,
+      currentStatus: task.status
+    })
+  },
+
+  unlockTask(task) {
+    const tasks = this.data.tasks.map(t => {
+      if (t.id === task.id) return { ...t, locked: false, revealed: true, status:"not_started" }
+      return t
+    })
+    const updated = tasks.find(t => t.id === task.id)
+    this.setData({ tasks })
+    this.saveCheckin()
+    this.setData({
+      showModal: true,
+      currentTask: updated,
+      currentStatus: updated.status
+    })
+  },
+
+  selectStatus(e) {
+    this.setData({ currentStatus: e.currentTarget.dataset.status })
+  },
+
+  saveStatus() {
+    const tasks = this.data.tasks.map(t => {
+      if (t.id === this.data.currentTask.id) {
+        return { ...t, status: this.data.currentStatus }
+      }
+      return t
+    })
+    this.setData({ tasks, showModal: false })
+    this.saveCheckin()
+    this.updateProgress(tasks)
+  },
+
+  closeModal() {
+    this.setData({ showModal: false })
+  },
+
+  preventBubble() {},
+
+  updateProgress(tasks) {
+    const doneCount = tasks.filter(t => t.status === "completed").length
+    this.setData({
+      doneCount,
+      percent: Math.round((doneCount / this.data.totalCount) * 100)
     })
   },
 
   openArticle() {
-    wx.navigateTo({ url: '/pages/wechat/wechat' })
+    wx.navigateTo({ url: "/pages/wechat/wechat" })
   },
 
   onShareAppMessage() {
     return {
-      title: '整理手账本 · 用整理治愈生活',
-      path: '/pages/handbook/handbook',
-      imageUrl: '/images/share-handbook.png'
+      title: "9月整理计划 · 整理纪念品",
+      path: "/pages/handbook/handbook",
+      imageUrl: "/images/share-handbook.png"
     }
   },
 
   onShareTimeline() {
     return {
-      title: '整理手账本 · 用整理治愈生活',
-      imageUrl: '/images/share-handbook.png'
+      title: "9月整理计划 · 整理纪念品",
+      imageUrl: "/images/share-handbook.png"
     }
-  },
+  }
 })

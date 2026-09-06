@@ -1,22 +1,61 @@
 <view class="page">
-  <!-- 顶部 -->
-  <view class="hero">
-    <text class="hero-title">整理手账本</text>
-    <text class="hero-sub">每月一册 · 用整理治愈生活</text>
-  </view>
 
-  <!-- 当月手账 -->
-  <view class="current-month">
-    <text class="month-title">2026年7月手账本</text>
-    <view class="features">
-      <text class="feature-tag">A4双面彩色打印</text>
-      <text class="feature-tag">短边翻转</text>
-      <text class="feature-tag">对折装订</text>
+  <!-- 打卡卡片 -->
+  <view class="checkin-card">
+    <view class="hero-header">
+      <text class="hero-label">9月整理计划 · 整理纪念品</text>
     </view>
-    <button class="btn-download" bindtap="tapDownload">📥 观看广告后即可免费下载</button>
+    <view class="progress-wrap">
+      <view class="progress-bar">
+        <view class="progress-inner" style="width: {{percent}}%;"></view>
+      </view>
+      <text class="progress-text">已完成 {{doneCount}} / {{totalCount}}</text>
+    </view>
+    <view class="checkin-grid">
+      <view
+        wx:for="{{tasks}}"
+        wx:key="id"
+        class="checkin-item {{item.locked ? 'locked' : ''}} {{!item.revealed ? 'hidden' : ''}} status-{{item.status}}"
+        data-id="{{item.id}}"
+        bindtap="tapCheckin"
+      >
+        <block wx:if="{{item.locked}}">
+          <text class="ci-icon">🔒</text>
+          <text class="ci-label">观看广告解锁</text>
+        </block>
+        <block wx:elif="{{!item.revealed}}">
+          <text class="ci-icon">?</text>
+          <text class="ci-label">点击翻开</text>
+        </block>
+        <block wx:else>
+          <text class="ci-icon">{{item.icon}}</text>
+          <text class="ci-label">{{item.label}}</text>
+          <text wx:if="{{item.status === 'in_progress'}}" class="ci-timer">⏳</text>
+          <text wx:if="{{item.status === 'completed'}}" class="ci-check">✓</text>
+        </block>
+      </view>
+    </view>
+    <view class="checkin-hint">
+      <text class="checkin-hint-text">搭配本月整理疗愈手账本，练习更有力量</text>
+      <text class="checkin-hint-vip" bindtap="openArticle">VIP</text>
+    </view>
   </view>
 
-  <!-- 全年主题预告 -->
+  <!-- 会员 -->
+  <view class="vip-section">
+    <view class="vip-card">
+      <view class="vip-badge"><text>VIP</text></view>
+      <text class="vip-title">加入「改变从整理开始」年度会员</text>
+      <view class="vip-benefits">
+        <text class="vip-benefit">📖 整理疗愈手账本，每月一册</text>
+        <text class="vip-benefit">💬 群内随时提问，有问必答</text>
+        <text class="vip-benefit">🤝 同频伙伴一起坚持，告别三分钟热度</text>
+      </view>
+      <text class="vip-more" bindtap="openArticle">了解年度会员详情 ›</text>
+    </view>
+  </view>
+
+  <!-- 全年主题 -->
   <view class="archive">
     <text class="archive-title">2026·全年主题预告</text>
     <view class="theme-list">
@@ -26,9 +65,9 @@
       <view class="theme-item done"><text class="theme-month">4月</text><text class="theme-name">探寻滋养</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">5月</text><text class="theme-name">工作整理</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">6月</text><text class="theme-name">优化饮食环境</text><text class="theme-check">✓</text></view>
-      <view class="theme-item current"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text><text class="theme-tag">最新</text></view>
-      <view class="theme-item"><text class="theme-month">8月</text><text class="theme-name">梳理人际关系</text></view>
-      <view class="theme-item"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text></view>
+      <view class="theme-item done"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text><text class="theme-check">✓</text></view>
+      <view class="theme-item done"><text class="theme-month">8月</text><text class="theme-name">梳理人际关系</text><text class="theme-check">✓</text></view>
+      <view class="theme-item current"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text><text class="theme-tag">最新</text></view>
       <view class="theme-item"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text></view>
       <view class="theme-item"><text class="theme-month">11月</text><text class="theme-name">家的保养</text></view>
       <view class="theme-item"><text class="theme-month">12月</text><text class="theme-name">全年复盘</text></view>
@@ -36,17 +75,35 @@
     <text class="archive-note">*实际推出内容可能优化调整，请以最终版本为准</text>
   </view>
 
-  <!-- VIP会员 -->
-  <view class="vip-section">
-    <view class="vip-card">
-      <view class="vip-badge"><text>VIP</text></view>
-      <text class="vip-title">加入「改变从整理开始」年度会员</text>
-      <view class="vip-benefits">
-        <text class="vip-benefit">✨ 每月提前获赠整理手账本</text>
-        <text class="vip-benefit">💬 群内随时提问，有问必答</text>
-        <text class="vip-benefit">🤝 同频伙伴一起坚持，告别三分钟热度</text>
-      </view>
-      <text class="vip-more" bindtap="openArticle">了解年度会员详情 ›</text>
+</view>
+
+<!-- 弹窗 -->
+<view class="modal-overlay" wx:if="{{showModal}}" bindtap="closeModal">
+  <view class="modal-sheet" catchtap="preventBubble">
+    <view class="modal-handle"></view>
+
+    <view class="modal-header">
+      <text class="modal-icon">{{currentTask.icon}}</text>
+      <text class="modal-title">{{currentTask.label}}</text>
+      <text class="modal-desc">{{currentTask.desc}}</text>
     </view>
+
+    <view class="modal-options">
+      <view
+        wx:for="{{statusOptions}}"
+        wx:key="value"
+        class="modal-option {{currentStatus === item.value ? 'active' : ''}}"
+        data-status="{{item.value}}"
+        bindtap="selectStatus"
+      >
+        <view class="modal-radio">
+          <view wx:if="{{currentStatus === item.value}}" class="modal-radio-dot"></view>
+        </view>
+        <text class="modal-option-emoji">{{item.emoji}}</text>
+        <text class="modal-option-label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <button class="modal-btn" bindtap="saveStatus">保存</button>
   </view>
 </view>
