@@ -3,7 +3,11 @@
   <!-- 打卡卡片 -->
   <view class="checkin-card">
     <view class="hero-header">
-      <text class="hero-label">9月整理计划 · 整理纪念品</text>
+      <text class="hero-label">10月整理计划 · 囤货盘点</text>
+    </view>
+    <view class="checkin-hint">
+      <text class="checkin-hint-text">搭配本月整理疗愈手账本，练习更有力量</text>
+      <text class="checkin-hint-vip" bindtap="openArticle">VIP</text>
     </view>
     <view class="progress-wrap">
       <view class="progress-bar">
@@ -15,15 +19,11 @@
       <view
         wx:for="{{tasks}}"
         wx:key="id"
-        class="checkin-item {{item.locked ? 'locked' : ''}} {{!item.revealed ? 'hidden' : ''}} status-{{item.status}}"
+        class="checkin-item {{!item.revealed ? 'hidden' : ''}} status-{{item.status}}"
         data-id="{{item.id}}"
         bindtap="tapCheckin"
       >
-        <block wx:if="{{item.locked}}">
-          <text class="ci-icon">🔒</text>
-          <text class="ci-label">观看广告解锁</text>
-        </block>
-        <block wx:elif="{{!item.revealed}}">
+        <block wx:if="{{!item.revealed}}">
           <text class="ci-icon">?</text>
           <text class="ci-label">点击翻开</text>
         </block>
@@ -35,10 +35,7 @@
         </block>
       </view>
     </view>
-    <view class="checkin-hint">
-      <text class="checkin-hint-text">搭配本月整理疗愈手账本，练习更有力量</text>
-      <text class="checkin-hint-vip" bindtap="openArticle">VIP</text>
-    </view>
+    <button class="btn-download" bindtap="downloadPlan">📥 观看广告后即可免费下载</button>
   </view>
 
   <!-- 会员 -->
@@ -67,8 +64,8 @@
       <view class="theme-item done"><text class="theme-month">6月</text><text class="theme-name">优化饮食环境</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">8月</text><text class="theme-name">梳理人际关系</text><text class="theme-check">✓</text></view>
-      <view class="theme-item current"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text><text class="theme-tag">最新</text></view>
-      <view class="theme-item"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text></view>
+      <view class="theme-item done"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text><text class="theme-check">✓</text></view>
+      <view class="theme-item current"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text><text class="theme-tag">最新</text></view>
       <view class="theme-item"><text class="theme-month">11月</text><text class="theme-name">家的保养</text></view>
       <view class="theme-item"><text class="theme-month">12月</text><text class="theme-name">全年复盘</text></view>
     </view>
@@ -107,3 +104,6 @@
     <button class="modal-btn" bindtap="saveStatus">保存</button>
   </view>
 </view>
+
+<!-- 离屏画布：生成 A4 打印版 -->
+<canvas type="2d" id="planCanvas" class="offscreen-canvas"></canvas>

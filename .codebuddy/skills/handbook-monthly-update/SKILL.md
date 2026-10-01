@@ -44,6 +44,12 @@ description: 更新「改变从整理开始」小程序每月整理计划（hand
    - 二维码 `handbookQR.png` 不变（路径固定为 handbook 页面）。
    - 提醒用户用 F12 → Capture node screenshot 导出 PNG。
 
-6. **提醒用户**：
+6. **更新 A4 打印版配置** `handbook.js` 顶部 `POSTER` 常量：
+   - `year` / `monthCn`（如「玖月」）、`quote` / `author`（当月名言）
+   - `curMonth` 改为当前月数字，`doneMonths` 包含所有已过去月份
+   - 清单任务自动取自 `plan-data.js`（`this.data.tasks`），无需单独改
+   - 生成效果可参考根目录 `_preview_plan_a4.html`（同一布局的浏览器预览版，可同步更新预览）
+
+7. **提醒用户**：
    - 上传新 PDF 到托管源 → 清缓存（若有下载功能）。
    - 用记事本重存 `plan-data.js` 为 UTF-8（若手工改过）。
