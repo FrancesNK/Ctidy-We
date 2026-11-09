@@ -3,7 +3,7 @@
   <!-- 打卡卡片 -->
   <view class="checkin-card">
     <view class="hero-header">
-      <text class="hero-label">10月整理计划 · 囤货盘点</text>
+      <text class="hero-label">2026年 · 拾壹月 · 家的保养</text>
     </view>
     <view class="checkin-hint">
       <text class="checkin-hint-text">搭配本月整理疗愈手账本，练习更有力量</text>
@@ -65,8 +65,8 @@
       <view class="theme-item done"><text class="theme-month">7月</text><text class="theme-name">规划家庭空间</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">8月</text><text class="theme-name">梳理人际关系</text><text class="theme-check">✓</text></view>
       <view class="theme-item done"><text class="theme-month">9月</text><text class="theme-name">整理纪念品</text><text class="theme-check">✓</text></view>
-      <view class="theme-item current"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text><text class="theme-tag">最新</text></view>
-      <view class="theme-item"><text class="theme-month">11月</text><text class="theme-name">家的保养</text></view>
+      <view class="theme-item done"><text class="theme-month">10月</text><text class="theme-name">囤货盘点</text><text class="theme-check">✓</text></view>
+      <view class="theme-item current"><text class="theme-month">11月</text><text class="theme-name">家的保养</text><text class="theme-tag">最新</text></view>
       <view class="theme-item"><text class="theme-month">12月</text><text class="theme-name">全年复盘</text></view>
     </view>
     <text class="archive-note">*实际推出内容可能优化调整，请以最终版本为准</text>

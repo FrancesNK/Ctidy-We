@@ -1,13 +1,14 @@
-const CHECKIN_KEY = "handbook_checkin_202610"
+const CHECKIN_KEY = "handbook_checkin_202611"
 
 // A4 打印版配置（每月更新）
 const POSTER = {
   year: "2026年",
-  monthCn: "拾月",
-  quote: "少则得，多则惑。",
-  author: "── 老子《道德经》",
-  curMonth: 10,
-  doneMonths: [1,2,3,4,5,6,7,8,9],
+  monthCn: "拾壹月",
+  theme: "家的保养",
+  quote: "斯是陋室，惟吾德馨。",
+  author: "── 刘禹锡《陋室铭》",
+  curMonth: 11,
+  doneMonths: [1,2,3,4,5,6,7,8,9,10],
   yearThemes: [
     "建立整理秩序","数字极简","衣柜换季","探寻滋养",
     "工作整理","优化饮食环境","规划家庭空间","梳理人际关系",
@@ -35,7 +36,7 @@ Page({
     tasks: require("./plan-data.js").map(t => ({
       ...t, status:"not_started", locked: false, revealed: false
     })),
-    totalCount: 4,
+    totalCount: 8,
     doneCount: 0,
     percent: 0,
     showModal: false,
@@ -201,16 +202,7 @@ Page({
             canvas, x: 0, y: 0, width: W, height: H, destWidth: W, destHeight: H,
             success: r => {
               wx.hideLoading()
-              wx.saveImageToPhotosAlbum({
-                filePath: r.tempFilePath,
-                success: () => wx.showToast({ title: '已保存到相册', icon: 'success' }),
-                fail: () => wx.showModal({
-                  title: '需要相册权限',
-                  content: '请在设置中允许保存到相册',
-                  confirmText: '去设置',
-                  success: m => { if (m.confirm) wx.openSetting() }
-                })
-              })
+              wx.previewImage({ urls: [r.tempFilePath] })
             },
             fail: () => { wx.hideLoading(); wx.showToast({ title: '生成失败', icon: 'none' }) }
           })
@@ -266,25 +258,27 @@ Page({
 
     // 清单
     const left = X(90.7), right = X(703.3)
+    const planTop = 340, planBottom = 880
+    const rowH = Math.min(90.7, (planBottom - planTop) / tasks.length)
     tasks.forEach((t, i) => {
-      const top = 365 + i * 90.7
+      const top = planTop + i * rowH
       ctx.strokeStyle = '#666'
       ctx.lineWidth = X(1.5)
-      roundRect(ctx, left, X(top + 26.5), X(24.6), X(24.6), X(4.5))
+      roundRect(ctx, left, X(top + rowH * 0.292), X(24.6), X(24.6), X(4.5))
       ctx.stroke()
       ctx.fillStyle = '#111'
       ctx.font = `bold ${X(17)}px sans-serif`
-      drawSpaced(t.label, left + X(36), X(top + 32.9), X(1), 'left')
+      drawSpaced(t.label, left + X(36), X(top + rowH * 0.363), X(1), 'left')
       ctx.fillStyle = '#666'
       ctx.font = `${X(12)}px sans-serif`
       ctx.textAlign = 'left'
-      ctx.fillText(t.desc, left + X(36), X(top + 58.4))
+      ctx.fillText(t.desc, left + X(36), X(top + rowH * 0.644))
       if (i < tasks.length - 1) {
         ctx.strokeStyle = '#f0f0f0'
         ctx.lineWidth = X(1)
         ctx.beginPath()
-        ctx.moveTo(left, X(top + 90.7))
-        ctx.lineTo(right, X(top + 90.7))
+        ctx.moveTo(left, X(top + rowH))
+        ctx.lineTo(right, X(top + rowH))
         ctx.stroke()
       }
     })
@@ -342,7 +336,7 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: "10月整理计划 · 囤货盘点",
+      title: "2026年 · 拾壹月 · 家的保养",
       path: "/pages/handbook/handbook",
       imageUrl: "/images/share-handbook.png"
     }
@@ -350,7 +344,7 @@ Page({
 
   onShareTimeline() {
     return {
-      title: "10月整理计划 · 囤货盘点",
+      title: "2026年 · 拾壹月 · 家的保养",
       imageUrl: "/images/share-handbook.png"
     }
   }
